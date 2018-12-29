@@ -138,125 +138,125 @@ typedef unsigned __int32 uint32_t;
 namespace GUI {
 
 /// ARGB 24-bit color value: (a<<24)|(r<<16)|(g<<8)|(b)
-typedef uint32_t RGB;
+typedef uint32_t ARGB8;
 
 /// Collection of all color-related constants and functions.
 namespace Color {
 /// A fully transparent pixel.
-const RGB Transparent = 0x00ffffff;
+const ARGB8 Transparent = 0x00ffffff;
 
 /// A fully opaque black pixel.
-const RGB Black = 0xff000000;
+const ARGB8 Black = 0xff000000;
 
 /// A fully opaque white pixel.
-const RGB White = 0xffffffff;
+const ARGB8 White = 0xffffffff;
 
 /// Alpha mask.
-const RGB AlphaMask = 0xff000000;
+const ARGB8 AlphaMask = 0xff000000;
 
 /// Offset of alpha value.
 const int AlphaShift = 24;
 
 /// Red mask.
-const RGB RedMask = 0x00ff0000;
+const ARGB8 RedMask = 0x00ff0000;
 
 /// Full-intensity red.
-const RGB Red = Black|RedMask;
+const ARGB8 Red = Black|RedMask;
 
 /// Offset of red value.
 const int RedShift = 16;
 
 /// Green mask.
-const RGB GreenMask = 0x0000ff00;
+const ARGB8 GreenMask = 0x0000ff00;
 
 /// Full-intensity green.
-const RGB Green = Black|GreenMask;
+const ARGB8 Green = Black|GreenMask;
 
 /// Offset of green value.
 const int GreenShift = 8;
 
 /// Blue mask.
-const RGB BlueMask = 0x000000ff;
+const ARGB8 BlueMask = 0x000000ff;
 
 /// Full-intensity blue.
-const RGB Blue = Black|BlueMask;
+const ARGB8 Blue = Black|BlueMask;
 
 /// Offset of blue value.
 const int BlueShift = 0;
 
 /// Full-intensity Magenta.
-const RGB Magenta = Red|Blue;
+const ARGB8 Magenta = Red|Blue;
 
 /// Magenta mask.
-const RGB MagentaMask = RedMask|BlueMask;
+const ARGB8 MagentaMask = RedMask|BlueMask;
 
 /// Full-intensity Cyan.
-const RGB Cyan = Green|Blue;
+const ARGB8 Cyan = Green|Blue;
 
 /// Cyan mask.
-const RGB CyanMask = GreenMask|BlueMask;
+const ARGB8 CyanMask = GreenMask|BlueMask;
 
 /// Full-intensity Yellow.
-const RGB Yellow = Red|Green;
+const ARGB8 Yellow = Red|Green;
 
 /// Yellow mask.
-const RGB YellowMask = RedMask|GreenMask;
+const ARGB8 YellowMask = RedMask|GreenMask;
 
 /// 50% grey
-const RGB Grey50 = 0xff808080;
+const ARGB8 Grey50 = 0xff808080;
 
 /// Background color for 3D effects. May be customized.
-extern RGB Background3D;
+extern ARGB8 Background3D;
 
 /// Light highlight color for 3D effects. May be customized.
-extern RGB Light3D;
+extern ARGB8 Light3D;
 
 /// Dark highlight color (shadow) for 3D effects. May be customized.
-extern RGB Shadow3D;
+extern ARGB8 Shadow3D;
 
 /// Generic border color for highlights or similar. May be customized.
-extern RGB Border;
+extern ARGB8 Border;
 
 /// Foreground color for regular content (mainly text). May be customized.
-extern RGB Text;
+extern ARGB8 Text;
 
 /// Background color for inactive areas. May be customized.
-extern RGB Background;
+extern ARGB8 Background;
 
 /// Background color for selected areas. May be customized.
-extern RGB SelectionBackground;
+extern ARGB8 SelectionBackground;
 
 /// Foreground color for selected areas. May be customized.
-extern RGB SelectionForeground;
+extern ARGB8 SelectionForeground;
 
 /// Background color for inputs / application area. May be customized.
-extern RGB EditableBackground;
+extern ARGB8 EditableBackground;
 
 /// Title bar color for windows. May be customized.
-extern RGB Titlebar;
+extern ARGB8 Titlebar;
 
 /// Title bar text color for windows. May be customized.
-extern RGB TitlebarText;
+extern ARGB8 TitlebarText;
 
 /// Title bar color for windows. May be customized.
-extern RGB TitlebarInactive;
+extern ARGB8 TitlebarInactive;
 
 /// Title bar text color for windows. May be customized.
-extern RGB TitlebarInactiveText;
+extern ARGB8 TitlebarInactiveText;
 
 /// Convert separate r, g, b and a values (each 0-255) to an RGB value.
-static inline RGB rgba(unsigned int r, unsigned int g, unsigned int b, unsigned int a=0) {
+static inline ARGB8 rgba(unsigned int r, unsigned int g, unsigned int b, unsigned int a=0) {
 	return (((r&255)<<RedShift)|((g&255)<<GreenShift)|((b&255)<<BlueShift)|((a&255)<<AlphaShift));
 }
 
 /// Get red value (0-255) from an RGB value.
-static inline unsigned int R(RGB val) { return ((val&Color::RedMask)>>Color::RedShift); }
+static inline unsigned int R(ARGB8 val) { return ((val&Color::RedMask)>>Color::RedShift); }
 /// Get green value (0-255) from an RGB value.
-static inline unsigned int G(RGB val) { return ((val&Color::GreenMask)>>Color::GreenShift); }
+static inline unsigned int G(ARGB8 val) { return ((val&Color::GreenMask)>>Color::GreenShift); }
 /// Get blue value (0-255) from an RGB value.
-static inline unsigned int B(RGB val) { return ((val&Color::BlueMask)>>Color::BlueShift); }
+static inline unsigned int B(ARGB8 val) { return ((val&Color::BlueMask)>>Color::BlueShift); }
 /// Get alpha value (0-255) from an RGB value.
-static inline unsigned int A(RGB val) { return ((val&Color::AlphaMask)>>Color::AlphaShift); }
+static inline unsigned int A(ARGB8 val) { return ((val&Color::AlphaMask)>>Color::AlphaShift); }
 
 }
 
@@ -790,10 +790,10 @@ protected:
 	MouseButton button;
 
 	/// Store a single RGB triple (8 bit each) as a native pixel value and advance pointer.
-	virtual void rgbToSurface(RGB color, void **pixel) = 0;
+	virtual void rgbToSurface(ARGB8 color, void **pixel) = 0;
 
 	/// Map a single framebuffer pixel to an RGB value.
-	virtual RGB surfaceToRGB(void *pixel) = 0;
+	virtual ARGB8 surfaceToRGB(void *pixel) = 0;
 
 	/// Create a new screen with the given characteristics.
 	Screen(Size width, Size height);
@@ -898,10 +898,10 @@ public:
 class ScreenRGB32le : public Screen {
 protected:
 	/// Map a single RGB triple (8 bit each) to a native pixel value.
-	virtual void rgbToSurface(RGB color, void **pixel) { RGB **p = (RGB **)pixel; **p = color; (*p)++; };
+	virtual void rgbToSurface(ARGB8 color, void **pixel) { ARGB8 **p = (ARGB8 **)pixel; **p = color; (*p)++; };
 
 	/// Map a single surface pixel to an RGB value.
-	virtual RGB surfaceToRGB(void *pixel) { return *(RGB*)pixel; };
+	virtual ARGB8 surfaceToRGB(void *pixel) { return *(ARGB8*)pixel; };
 public:
 	ScreenRGB32le(Size width, Size height) : Screen(width,height) {};
 
@@ -927,10 +927,10 @@ public:
 class ScreenSDL : public Screen {
 protected:
 	/// not used.
-	virtual void rgbToSurface(RGB color, void **pixel) { (void)color; (void)pixel; };
+	virtual void rgbToSurface(ARGB8 color, void **pixel) { (void)color; (void)pixel; };
 
 	/// not used.
-	virtual RGB surfaceToRGB(void *pixel) { (void)pixel; return 0; };
+	virtual ARGB8 surfaceToRGB(void *pixel) { (void)pixel; return 0; };
 
 	/// The SDL surface being drawn to.
 	SDL_Surface *surface;
@@ -1004,7 +1004,7 @@ class Drawable {
 protected:
 	friend Ticks Screen::update(void *, Ticks);
 	/// The actual pixel buffer.
-	RGB *const buffer;
+	ARGB8 *const buffer;
 	/// Total width of buffer.
 	const int width;
 	/// Total height of buffer.
@@ -1013,7 +1013,7 @@ protected:
 	const bool owner;
 
 	/// Current color.
-	RGB color;
+	ARGB8 color;
 	/// Current font.
 	const Font *font;
 	/// Current line width.
@@ -1040,14 +1040,14 @@ protected:
 public:
 	/// Create an empty drawable object with given dimensions.
 	/** Optionally, the area is cleared with a given color (default: fully transparent). */
-	Drawable(int w, int h, RGB clear = Color::Transparent);
+	Drawable(int w, int h, ARGB8 clear = Color::Transparent);
 
 	/// Deep-copying copy constructor.
 	/** It honours clip and translate so that the resulting drawable, if drawn
 	 *  to the source drawable at (0,0), yields the same result as drawing
 	 *  directly to the source surface. If \p fill is not explicitly set, will
 	 *  copy the original surface's contents */
-	Drawable(Drawable &src, RGB clear = 0);
+	Drawable(Drawable &src, ARGB8 clear = 0);
 
 	/// Shallow-copying copy constructor with clip & translate. See setClipTranslate(int x, int y, int w, int h).
 	Drawable(Drawable &src, int x, int y, int w, int h);
@@ -1056,16 +1056,16 @@ public:
 	virtual ~Drawable();
 
 	/// Clears the surface.
-	void clear(RGB clear = Color::Transparent);
+	void clear(ARGB8 clear = Color::Transparent);
 
 	/// Change current drawing color.
 	/** The alpha part is honoured in all drawing primitives like this:
 	    All drawing operations in this window will unconditionally overwrite
 	    earlier content of this window. Only when combining this window with
 	    it's parent, the alpha channel is fully honoured. */
-	void setColor(RGB c) { color = c; };
+	void setColor(ARGB8 c) { color = c; };
 	/// Return the currently selected drawing color.
-	RGB getColor() { return color; };
+	ARGB8 getColor() { return color; };
 
 	/// Change current drawing font.
 	void setFont(const Font *f) { font = f; };
@@ -1099,9 +1099,9 @@ public:
 	void drawPixel(int x, int y) { gotoXY(x,y); drawPixel(); };
 
 	/// Return the pixel color at the current position.
-	RGB getPixel() { if (x >= cx && x < cw && y >= cy && y < ch) return buffer[x+tx+(y+ty)*width]; return Color::Transparent; };
+	ARGB8 getPixel() { if (x >= cx && x < cw && y >= cy && y < ch) return buffer[x+tx+(y+ty)*width]; return Color::Transparent; };
 	/// Return the pixel color at the given coordinates.
-	RGB getPixel(int x, int y) { gotoXY(x,y); return getPixel(); };
+	ARGB8 getPixel(int x, int y) { gotoXY(x,y); return getPixel(); };
 
 	/// Draw a straight line from the current position to the given coordinates.
 	void drawLine(int x2, int y2);
@@ -1484,7 +1484,7 @@ class Label : public Window {
 	const Font *font;
 
 	/// Text color
-	RGB color;
+	ARGB8 color;
 
 	/// Text
 	String text;
@@ -1495,7 +1495,7 @@ class Label : public Window {
 public:
 	/// Create a text label with given position, \p text, \p font and \p color.
 	/** If \p width is given, the resulting label is a word-wrapped multiline label */
-	template <typename STR> Label(Window *parent, int x, int y, const STR text, int width = 0, const Font *font = Font::getFont("default"), RGB color = Color::Text) :
+	template <typename STR> Label(Window *parent, int x, int y, const STR text, int width = 0, const Font *font = Font::getFont("default"), ARGB8 color = Color::Text) :
 		Window(parent, x, y, (width?width:1), 1), font(font), color(color), text(text), interpret(width != 0)
 	{ resize(); tabbable = false; }
 
@@ -1510,9 +1510,9 @@ public:
 	const Font *getFont() { return font; }
 
 	/// Set a new text color.
-	void setColor(const RGB color) { this->color = color; resize(); }
+	void setColor(const ARGB8 color) { this->color = color; resize(); }
 	/// Retrieve current color
-	RGB getColor() { return color; }
+	ARGB8 getColor() { return color; }
 
 	/// Calculate label size. Parameters are ignored.
 	virtual void resize(int w = -1, int h = -1) {

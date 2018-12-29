@@ -38,19 +38,19 @@
 namespace GUI {
 
 namespace Color {
-	RGB Background3D =		0xffc0c0c0;
-	RGB Light3D =			0xfffcfcfc;
-	RGB Shadow3D =			0xff808080;
-	RGB Border =			0xff000000;
-	RGB Text =			0xff000000;
-	RGB Background =		0xffc0c0c0;
-	RGB SelectionBackground =	0xff000080;
-	RGB SelectionForeground =	0xffffffff;
-	RGB EditableBackground =	0xffffffff;
-	RGB Titlebar =			0xff000080;
-	RGB TitlebarText =		0xffffffff;
-	RGB TitlebarInactive =			0xffffffff;
-	RGB TitlebarInactiveText =		0xff7f7f7f;
+	ARGB8 Background3D =		0xffc0c0c0;
+	ARGB8 Light3D =			0xfffcfcfc;
+	ARGB8 Shadow3D =			0xff808080;
+	ARGB8 Border =			0xff000000;
+	ARGB8 Text =			0xff000000;
+	ARGB8 Background =		0xffc0c0c0;
+	ARGB8 SelectionBackground =	0xff000080;
+	ARGB8 SelectionForeground =	0xffffffff;
+	ARGB8 EditableBackground =	0xffffffff;
+	ARGB8 Titlebar =			0xff000080;
+	ARGB8 TitlebarText =		0xffffffff;
+	ARGB8 TitlebarInactive =			0xffffffff;
+	ARGB8 TitlebarInactiveText =		0xff7f7f7f;
 }
 
 std::map<const char *,Font *,Font::ltstr> Font::registry;
@@ -144,8 +144,8 @@ void Drawable::drawText(const String& text, bool interpret, Size start, Size len
 								param = param * 10u + (unsigned int)c - '0';
 								c = font->toSpecial(text[seqstart++]);
 							}
-							const RGB bright = 0x00808080u;
-							const RGB intensity = (color&bright?~0u:~bright);
+							const ARGB8 bright = 0x00808080u;
+							const ARGB8 intensity = (color&bright?~0u:~bright);
 							switch (param) {
 							case 0: setColor(Color::Black); break;
 							case 1: setColor(color | 0x00808080u); break;
@@ -193,8 +193,8 @@ bool ToplevelWindow::mouseDown(int x, int y, MouseButton button) {
 	return true;
 }
 
-Drawable::Drawable(int w, int h, RGB clear) :
-	buffer(new RGB[w*h]),
+Drawable::Drawable(int w, int h, ARGB8 clear) :
+	buffer(new ARGB8[w*h]),
 	width(w), height(h),
 	owner(true),
 	color(Color::Black),
@@ -208,8 +208,8 @@ Drawable::Drawable(int w, int h, RGB clear) :
 	this->clear(clear);
 }
 
-Drawable::Drawable(Drawable &src, RGB clear) :
-	buffer(new RGB[src.cw*src.ch]),
+Drawable::Drawable(Drawable &src, ARGB8 clear) :
+	buffer(new ARGB8[src.cw*src.ch]),
 	width(src.cw), height(src.ch),
 	owner(true),
 	color(src.color),
@@ -248,7 +248,7 @@ Drawable::~Drawable()
 	if (owner) delete[] buffer;
 }
 
-void Drawable::clear(RGB clear)
+void Drawable::clear(ARGB8 clear)
 {
 	for (int y = cy; y < ch; y++) {
 		for (int x = cx; x < cw; x++) {
@@ -374,7 +374,7 @@ void Drawable::drawDotRect(int w, int h)
 void Drawable::fill()
 {
 	int x0 = x, xmin;
-	RGB color = getPixel();
+	ARGB8 color = getPixel();
 
 	if (color == this->color) return;
 
@@ -427,13 +427,13 @@ void Drawable::fillRect(int w, int h)
 void Drawable::drawDrawable(Drawable &d, unsigned char alpha)
 {
 	int scw = d.cw, sch = d.ch, w, h;
-	RGB *src, *dest;
+	ARGB8 *src, *dest;
 
 	for (h = imax(d.cy,-ty-y); h < sch && y+h < ch; h++) {
 		src = d.buffer+d.width*(h+d.ty)+d.tx;
 		dest = buffer+width*(y+ty+h)+tx+x;
 		for (w = imax(d.cx,-tx-x); w < scw && x+w < cw; w++) {
-			RGB srcb = src[w], destb = dest[w];
+			ARGB8 srcb = src[w], destb = dest[w];
 			unsigned int sop = Color::A(srcb)*((unsigned int)alpha)/255;
 			unsigned int rop = Color::A(destb) + sop - Color::A(destb)*sop/255;
 			if (rop == 0) {
@@ -1427,11 +1427,11 @@ unsigned int Screen::update(void *surface, unsigned int ticks)
 {
     (void)ticks;//UNUSED
 	paintAll(*buffer);
-	RGB *buf = buffer->buffer;
+	ARGB8 *buf = buffer->buffer;
 	for (y = 0; y < height; y++) {
 		for (x = 0; x < width; x++, buf++) {
-			RGB sval = surfaceToRGB(surface);
-			RGB bval = *buf;
+			ARGB8 sval = surfaceToRGB(surface);
+			ARGB8 bval = *buf;
 			unsigned int a = Color::A(bval);
 			bval = ((((sval&Color::MagentaMask)*a+(bval&Color::MagentaMask)*(256-a))>>8)&Color::MagentaMask)
 				| ((((sval&Color::GreenMask)*a+(bval&Color::GreenMask)*(256-a))>>8)&Color::GreenMask);
@@ -1626,7 +1626,7 @@ protected:
 	SDL_Surface *const surface;
 
 public:
-	SDL_Drawable(int width, int height, RGB clear = Color::Transparent) : Drawable(width, height, clear), surface(SDL_CreateRGBSurfaceFrom(buffer, width, height, 32, width*4, Color::RedMask, Color::GreenMask, Color::BlueMask, Color::AlphaMask)) {
+	SDL_Drawable(int width, int height, ARGB8 clear = Color::Transparent) : Drawable(width, height, clear), surface(SDL_CreateRGBSurfaceFrom(buffer, width, height, 32, width*4, Color::RedMask, Color::GreenMask, Color::BlueMask, Color::AlphaMask)) {
 #if !defined(C_SDL2)
 	    surface->flags |= SDL_SRCALPHA;
 #endif

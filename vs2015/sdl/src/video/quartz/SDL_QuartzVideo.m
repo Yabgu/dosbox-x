@@ -1561,8 +1561,7 @@ void QZ_UpdateRectsOnDrawRect(/*TODO: NSRect from drawRect*/) {
 	// HACK
 	SDL_VideoDevice *this = last_this;
 
-	if (this == NULL) return;
-	if (SDL_VideoSurface == NULL) return;
+	if (this == NULL || SDL_VideoSurface == NULL) return;
 
     if (SDL_VideoSurface->flags & SDL_OPENGLBLIT) {
 	// TODO?
