@@ -15,49 +15,49 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\adler32.c">
+    <ClCompile Include="..\adler32.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\compress.c">
+    <ClCompile Include="..\compress.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\crc32.c">
+    <ClCompile Include="..\crc32.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\deflate.c">
+    <ClCompile Include="..\deflate.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\gzclose.c">
+    <ClCompile Include="..\gzclose.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\gzlib.c">
+    <ClCompile Include="..\gzlib.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\gzread.c">
+    <ClCompile Include="..\gzread.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\gzwrite.c">
+    <ClCompile Include="..\gzwrite.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\infback.c">
+    <ClCompile Include="..\infback.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\inffast.c">
+    <ClCompile Include="..\inffast.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\inflate.c">
+    <ClCompile Include="..\inflate.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\inftrees.c">
+    <ClCompile Include="..\inftrees.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\trees.c">
+    <ClCompile Include="..\trees.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\uncompr.c">
+    <ClCompile Include="..\uncompr.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\zutil.c">
+    <ClCompile Include="..\zutil.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

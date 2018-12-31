@@ -35,21 +35,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\adler32.c" />
-    <ClCompile Include="..\compress.c" />
-    <ClCompile Include="..\crc32.c" />
-    <ClCompile Include="..\deflate.c" />
-    <ClCompile Include="..\gzclose.c" />
-    <ClCompile Include="..\gzlib.c" />
-    <ClCompile Include="..\gzread.c" />
-    <ClCompile Include="..\gzwrite.c" />
-    <ClCompile Include="..\infback.c" />
-    <ClCompile Include="..\inffast.c" />
-    <ClCompile Include="..\inflate.c" />
-    <ClCompile Include="..\inftrees.c" />
-    <ClCompile Include="..\trees.c" />
-    <ClCompile Include="..\uncompr.c" />
-    <ClCompile Include="..\zutil.c" />
+    <ClCompile Include="..\adler32.cc" />
+    <ClCompile Include="..\compress.cc" />
+    <ClCompile Include="..\crc32.cc" />
+    <ClCompile Include="..\deflate.cc" />
+    <ClCompile Include="..\gzclose.cc" />
+    <ClCompile Include="..\gzlib.cc" />
+    <ClCompile Include="..\gzread.cc" />
+    <ClCompile Include="..\gzwrite.cc" />
+    <ClCompile Include="..\infback.cc" />
+    <ClCompile Include="..\inffast.cc" />
+    <ClCompile Include="..\inflate.cc" />
+    <ClCompile Include="..\inftrees.cc" />
+    <ClCompile Include="..\trees.cc" />
+    <ClCompile Include="..\uncompr.cc" />
+    <ClCompile Include="..\zutil.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\crc32.h" />
@@ -77,6 +77,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>true</CLRSupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -271,11 +272,10 @@
       <SDLCheck>
       </SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile />
       <PrecompiledHeaderOutputFile />
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <ControlFlowGuard>Guard</ControlFlowGuard>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ControlFlowGuard>false</ControlFlowGuard>
       <StringPooling>false</StringPooling>
       <MinimalRebuild>false</MinimalRebuild>
       <FloatingPointExceptions>No</FloatingPointExceptions>
